@@ -1,0 +1,254 @@
+{
+  "serveur": "192.168.151.39",
+  "rapports": [
+    {
+      "rapport": "users",
+      "titre": "Utilisateurs du domaine",
+      "donnees": [
+        {
+          "SamAccountName": "Administrateur",
+          "DisplayName": "",
+          "UserPrincipalName": "",
+          "Enabled": "True",
+          "LockedOut": "False",
+          "PasswordNeverExpires": "True",
+          "PasswordLastSet": "30/09/2025 17:11:44",
+          "AccountExpirationDate": "",
+          "IsExpired": "False"
+        },
+        {
+          "SamAccountName": "Invité",
+          "DisplayName": "",
+          "UserPrincipalName": "",
+          "Enabled": "False",
+          "LockedOut": "False",
+          "PasswordNeverExpires": "True",
+          "PasswordLastSet": "",
+          "AccountExpirationDate": "",
+          "IsExpired": "False"
+        },
+        {
+          "SamAccountName": "krbtgt",
+          "DisplayName": "",
+          "UserPrincipalName": "",
+          "Enabled": "False",
+          "LockedOut": "False",
+          "PasswordNeverExpires": "False",
+          "PasswordLastSet": "02/10/2025 09:06:58",
+          "AccountExpirationDate": "",
+          "IsExpired": "False"
+        },
+        {
+          "SamAccountName": "sshd",
+          "DisplayName": "sshd",
+          "UserPrincipalName": "",
+          "Enabled": "True",
+          "LockedOut": "False",
+          "PasswordNeverExpires": "True",
+          "PasswordLastSet": "02/10/2025 09:13:31",
+          "AccountExpirationDate": "",
+          "IsExpired": "False"
+        },
+        {
+          "SamAccountName": "testuser",
+          "DisplayName": "",
+          "UserPrincipalName": "",
+          "Enabled": "True",
+          "LockedOut": "False",
+          "PasswordNeverExpires": "False",
+          "PasswordLastSet": "02/10/2025 10:27:21",
+          "AccountExpirationDate": "",
+          "IsExpired": "False"
+        },
+        {
+          "SamAccountName": "adurand",
+          "DisplayName": "Alice D.",
+          "UserPrincipalName": "",
+          "Enabled": "True",
+          "LockedOut": "False",
+          "PasswordNeverExpires": "False",
+          "PasswordLastSet": "02/10/2025 10:28:50",
+          "AccountExpirationDate": "",
+          "IsExpired": "False"
+        }
+      ]
+    },
+    {
+      "rapport": "groups",
+      "titre": "Groupes Active Directory",
+      "donnees": [
+        {
+          "SamAccountName": "Administrateurs"
+        },
+        {
+          "SamAccountName": "Utilisateurs"
+        },
+        {
+          "SamAccountName": "Invités"
+        },
+        {
+          "SamAccountName": "Opérateurs d’impression"
+        },
+        {
+          "SamAccountName": "Opérateurs de sauvegarde"
+        },
+        {
+          "SamAccountName": "Duplicateurs"
+        },
+        {
+          "SamAccountName": "Utilisateurs du Bureau à distance"
+        },
+        {
+          "SamAccountName": "Opérateurs de configuration réseau"
+        },
+        {
+          "SamAccountName": "Utilisateurs de l’Analyseur de performances"
+        },
+        {
+          "SamAccountName": "Utilisateurs du journal de performances"
+        },
+        {
+          "SamAccountName": "Utilisateurs du modèle COM distribué"
+        },
+        {
+          "SamAccountName": "IIS_IUSRS"
+        },
+        {
+          "SamAccountName": "Opérateurs de chiffrement"
+        },
+        {
+          "SamAccountName": "Lecteurs des journaux d’événements"
+        },
+        {
+          "SamAccountName": "Accès DCOM service de certificats"
+        },
+        {
+          "SamAccountName": "Serveurs Accès Distant RDS"
+        },
+        {
+          "SamAccountName": "Serveurs RDS Endpoint"
+        },
+        {
+          "SamAccountName": "Serveurs Gestion RDS"
+        },
+        {
+          "SamAccountName": "Administrateurs Hyper-V"
+        },
+        {
+          "SamAccountName": "Opérateurs d'assistance de contrôle d'accès"
+        },
+        {
+          "SamAccountName": "Utilisateurs de gestion à distance"
+        },
+        {
+          "SamAccountName": "Storage Replica Administrators"
+        },
+        {
+          "SamAccountName": "Ordinateurs du domaine"
+        },
+        {
+          "SamAccountName": "Contrôleurs de domaine"
+        },
+        {
+          "SamAccountName": "Administrateurs du schéma"
+        },
+        {
+          "SamAccountName": "Administrateurs de l’entreprise"
+        },
+        {
+          "SamAccountName": "Éditeurs de certificats"
+        },
+        {
+          "SamAccountName": "Admins du domaine"
+        },
+        {
+          "SamAccountName": "Utilisateurs du domaine"
+        },
+        {
+          "SamAccountName": "Invités du domaine"
+        },
+        {
+          "SamAccountName": "Propriétaires créateurs de la stratégie de groupe"
+        },
+        {
+          "SamAccountName": "Serveurs RAS et IAS"
+        },
+        {
+          "SamAccountName": "Opérateurs de serveur"
+        },
+        {
+          "SamAccountName": "Opérateurs de compte"
+        },
+        {
+          "SamAccountName": "Accès compatible pré-Windows 2000"
+        },
+        {
+          "SamAccountName": "Générateurs d’approbations de forêt entrante"
+        },
+        {
+          "SamAccountName": "Groupe d’accès d’autorisation Windows"
+        },
+        {
+          "SamAccountName": "Serveurs de licences des services Terminal Server"
+        },
+        {
+          "SamAccountName": "Groupe de réplication dont le mot de passe RODC est autorisé"
+        },
+        {
+          "SamAccountName": "Groupe de réplication dont le mot de passe RODC est refusé"
+        },
+        {
+          "SamAccountName": "Contrôleurs de domaine en lecture seule"
+        },
+        {
+          "SamAccountName": "Contrôleurs de domaine d’entreprise en lecture seule"
+        },
+        {
+          "SamAccountName": "Contrôleurs de domaine clonables"
+        },
+        {
+          "SamAccountName": "Protected Users"
+        },
+        {
+          "SamAccountName": "Administrateurs clés"
+        },
+        {
+          "SamAccountName": "Administrateurs clés Enterprise"
+        },
+        {
+          "SamAccountName": "DnsAdmins"
+        },
+        {
+          "SamAccountName": "DnsUpdateProxy"
+        }
+      ]
+    },
+    {
+      "rapport": "computers",
+      "titre": "Machines du domaine",
+      "donnees": [
+        {
+          "Name": "WIN-EHE9M88M7EM",
+          "IPv4Address": "192.168.151.39"
+        }
+      ]
+    },
+    {
+      "rapport": "domain_controllers",
+      "titre": "Contrôleurs de domaine",
+      "donnees": [
+        {
+          "DC": "WIN-EHE9M88M7EM.radar.local",
+          "Site": "Default-First-Site-Name",
+          "IPv4Address": "192.168.151.39",
+          "IsGlobalCatalog": "True",
+          "SchemaMaster": "True",
+          "DomainNamingMaster": "True",
+          "PDCEmulator": "True",
+          "RIDMaster": "True",
+          "InfrastructureMaster": "True"
+        }
+      ]
+    }
+  ]
+}

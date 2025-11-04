@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Projet RADAR - Active Directory Audit Tool">
+    <meta name="author" content="Votre Nom">
+    <title>RADAR - Active Directory Audit</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: pink;
+            min-height: 100vh;
+            padding: 20px;
+            margin: 2.5% 5%;
+        }
+
+        .search-box {
+            margin: 20px 0;
+            padding: 10px;
+            background: white;
+            border-radius: 5px;
+        }
+
+        .search-box input {
+            padding: 8px;
+            width: 300px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            margin: 10px 0;
+        }
+
+        th {
+            background: #2c3e50;
+            color: white;
+            padding: 10px;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        th:hover {
+            background: #34495e;
+        }
+
+        td {
+            padding: 8px;
+            border: 1px solid #ddd;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background: white;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        .logo-container {
+            width: 150px;
+            height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            transform: scaleX(-1);
+        }
+
+        .logo-container img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>ADBeacon</h1>
+            <div class="logo-container">
+                <img src="/image/latest.png" alt="Logo"
+                    onerror="this.style.display='none'; this.parentElement.innerHTML='Logo'">
+            </div>
+        </header>
+
+        <main>
+            <!-- Barre de recherche globale -->
+            <div class="search-box" style="background: #2c3e50; color: white; padding: 15px;">
+                <h3 style="margin-bottom: 10px;">Recherche globale</h3>
+                <input type="text" id="globalSearch" placeholder="Rechercher dans tous les tableaux..."
+                    onkeyup="globalSearch()" style="width: 100%; max-width: 600px;">
+            </div>
+
+            <!-- Résumé -->
+            <section id="header">
+                <h2>Résumé du domaine {{ metadata.domain }}</h2>
+                <p>Date de collecte : {{ metadata.collection_date }}</p>
+                {% if metadata.collection_duration_seconds != "N/A" %}
+                <p>Durée : {{ metadata.collection_duration_seconds }} s</p>
+                {% endif %}
+                <ul>
+                    {% if summary.total_users %}
+                    <li>Utilisateurs actifs : {{ summary.enabled_users }}/{{ summary.total_users }}</li>
+                    {% endif %}
+                    {% if summary.total_computers %}
+                    <li>Ordinateurs actifs : {{ summary.enabled_computers }}/{{ summary.total_computers }}</li>
+                    {% endif %}
+                    {% if summary.security_groups %}
+                    <li>Groupes de sécurité : {{ summary.security_groups }}</li>
+                    {% endif %}
+                </ul>
+            </section>
+
+            <!-- Tableau des utilisateurs -->
+            {% if users %}
+            <section id="user">
+                <h2>Utilisateurs</h2>
+                <div class="search-box">
+                    <input type="text" id="searchUsers" placeholder="Rechercher un utilisateur..."
+                        onkeyup="searchTable('searchUsers', 'usersTable')">
+                </div>
+                <table id="usersTable">
+                    <thead>
+                        <tr>
+                            <th onclick="sortTable('usersTable', 0)">Nom d'utilisateur ↕</th>
+                            <th onclick="sortTable('usersTable', 1)">Nom complet ↕</th>
+                            <th onclick="sortTable('usersTable', 2)">Email ↕</th>
+                            <th onclick="sortTable('usersTable', 3)">Statut ↕</th>
+                            <th onclick="sortTable('usersTable', 4)">Dernière connexion ↕</th>
+                            <th onclick="sortTable('usersTable', 5)">Groupes ↕</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for user in users %}
+                        <tr>
+                            <td>{{ user.username if user.username else "N/A" }}</td>
+                            <td>{{ user.display_name if user.display_name else "N/A" }}</td>
+                            <td>{{ user.email if user.email else "N/A" }}</td>
+                            <td>{{ user.status if user.status else "N/A" }}</td>
+                            <td>{{ user.last_logon if user.last_logon else "N/A" }}</td>
+                            <td>{{ user.member_of|join(', ') if user.member_of else "N/A" }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </section>
+            {% endif %}
+
+            <!-- Tableau des groupes -->
+            {% if groups %}
+            <section id="group">
+                <h2>Groupes</h2>
+                <div class="search-box">
+                    <input type="text" id="searchGroups" placeholder="Rechercher un groupe..."
+                        onkeyup="searchTable('searchGroups', 'groupsTable')">
+                </div>
+                <table id="groupsTable">
+                    <thead>
+                        <tr>
+                            <th onclick="sortTable('groupsTable', 0)">Nom ↕</th>
+                            <th onclick="sortTable('groupsTable', 1)">Type ↕</th>
+                            <th onclick="sortTable('groupsTable', 2)">Portée ↕</th>
+                            <th onclick="sortTable('groupsTable', 3)">Description ↕</th>
+                            <th onclick="sortTable('groupsTable', 4)">Nb membres ↕</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for group in groups %}
+                        <tr>
+                            <td>{{ group.name if group.name else "N/A" }}</td>
+                            <td>{{ group.type if group.type else "N/A" }}</td>
+                            <td>{{ group.scope if group.scope else "N/A" }}</td>
+                            <td>{{ group.description if group.description else "N/A" }}</td>
+                            <td>{{ group.member_count if group.member_count else "N/A" }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </section>
+            {% endif %}
+
+            <!-- Tableau des ordinateurs -->
+            {% if computers %}
+            <section id="computer">
+                <h2>Ordinateurs</h2>
+                <div class="search-box">
+                    <input type="text" id="searchComputers" placeholder="Rechercher un ordinateur..."
+                        onkeyup="searchTable('searchComputers', 'computersTable')">
+                </div>
+                <table id="computersTable">
+                    <thead>
+                        <tr>
+                            <th onclick="sortTable('computersTable', 0)">Nom ↕</th>
+                            <th onclick="sortTable('computersTable', 1)">DNS ↕</th>
+                            <th onclick="sortTable('computersTable', 2)">OS ↕</th>
+                            <th onclick="sortTable('computersTable', 3)">Statut ↕</th>
+                            <th onclick="sortTable('computersTable', 4)">IP ↕</th>
+                            <th onclick="sortTable('computersTable', 5)">Description ↕</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for computer in computers %}
+                        <tr>
+                            <td>{{ computer.name if computer.name else "N/A" }}</td>
+                            <td>{{ computer.dns_hostname if computer.dns_hostname else "N/A" }}</td>
+                            <td>{{ computer.operating_system if computer.operating_system else "N/A" }}</td>
+                            <td>{{ computer.status if computer.status else "N/A" }}</td>
+                            <td>{{ computer.ipv4_address if computer.ipv4_address else "N/A" }}</td>
+                            <td>{{ computer.description if computer.description else "N/A" }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </section>
+            {% endif %}
+        </main>
+
+        <footer>
+        </footer>
+    </div>
+
+    <script>
+        // Fonction de recherche dans un tableau
+        function searchTable(inputId, tableId) {
+            const input = document.getElementById(inputId);
+            const filter = input.value.toLowerCase();
+            const table = document.getElementById(tableId);
+            const rows = table.getElementsByTagName('tr');
+
+            for (let i = 1; i < rows.length; i++) {
+                const row = rows[i];
+                const cells = row.getElementsByTagName('td');
+                let found = false;
+
+                for (let j = 0; j < cells.length; j++) {
+                    const cell = cells[j];
+                    if (cell.textContent.toLowerCase().indexOf(filter) > -1) {
+                        found = true;
+                        break;
+                    }
+                }
+
+                row.style.display = found ? '' : 'none';
+            }
+        }
+
+        // Fonction de tri d'un tableau
+        function sortTable(tableId, columnIndex) {
+            const table = document.getElementById(tableId);
+            const rows = Array.from(table.querySelectorAll('tbody tr'));
+            const isAscending = table.dataset.sortOrder !== 'asc';
+
+            rows.sort((a, b) => {
+                const aText = a.cells[columnIndex].textContent.trim();
+                const bText = b.cells[columnIndex].textContent.trim();
+
+                // Détection si c'est un nombre
+                const aNum = parseFloat(aText);
+                const bNum = parseFloat(bText);
+
+                if (!isNaN(aNum) && !isNaN(bNum)) {
+                    return isAscending ? aNum - bNum : bNum - aNum;
+                }
+
+                // Sinon tri alphabétique
+                return isAscending
+                    ? aText.localeCompare(bText)
+                    : bText.localeCompare(aText);
+            });
+
+            const tbody = table.querySelector('tbody');
+            rows.forEach(row => tbody.appendChild(row));
+
+            table.dataset.sortOrder = isAscending ? 'asc' : 'desc';
+        }
+
+        // Fonction de recherche globale
+        function globalSearch() {
+            const input = document.getElementById('globalSearch');
+            const filter = input.value.toLowerCase();
+            const tables = ['usersTable', 'groupsTable', 'computersTable'];
+
+            tables.forEach(tableId => {
+                const table = document.getElementById(tableId);
+                if (!table) return;
+
+                const rows = table.getElementsByTagName('tr');
+
+                for (let i = 1; i < rows.length; i++) {
+                    const row = rows[i];
+                    const cells = row.getElementsByTagName('td');
+                    let found = false;
+
+                    for (let j = 0; j < cells.length; j++) {
+                        const cell = cells[j];
+                        if (cell.textContent.toLowerCase().indexOf(filter) > -1) {
+                            found = true;
+                            break;
+                        }
+                    }
+
+                    row.style.display = found ? '' : 'none';
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>

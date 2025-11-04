@@ -1,0 +1,77 @@
+{
+  "serveur": "192.168.151.39",
+  "rapports": [
+    {
+      "rapport": "users",
+      "titre": "Utilisateurs du domaine",
+      "donnees": [
+        {
+          "SamAccountName": "Administrateur",
+          "DisplayName": "",
+          "UserPrincipalName": "",
+          "Enabled": "True",
+          "LockedOut": "False",
+          "PasswordNeverExpires": "True",
+          "PasswordLastSet": "30/09/2025 17:11:44",
+          "AccountExpirationDate": "",
+          "IsExpired": "False"
+        },
+        {
+          "SamAccountName": "Invité",
+          "DisplayName": "",
+          "UserPrincipalName": "",
+          "Enabled": "False",
+          "LockedOut": "False",
+          "PasswordNeverExpires": "True",
+          "PasswordLastSet": "",
+          "AccountExpirationDate": "",
+          "IsExpired": "False"
+        },
+        {
+          "SamAccountName": "krbtgt",
+          "DisplayName": "",
+          "UserPrincipalName": "",
+          "Enabled": "False",
+          "LockedOut": "False",
+          "PasswordNeverExpires": "False",
+          "PasswordLastSet": "02/10/2025 09:06:58",
+          "AccountExpirationDate": "",
+          "IsExpired": "False"
+        },
+        {
+          "SamAccountName": "sshd",
+          "DisplayName": "sshd",
+          "UserPrincipalName": "",
+          "Enabled": "True",
+          "LockedOut": "False",
+          "PasswordNeverExpires": "True",
+          "PasswordLastSet": "02/10/2025 09:13:31",
+          "AccountExpirationDate": "",
+          "IsExpired": "False"
+        },
+        {
+          "SamAccountName": "testuser",
+          "DisplayName": "",
+          "UserPrincipalName": "",
+          "Enabled": "True",
+          "LockedOut": "False",
+          "PasswordNeverExpires": "False",
+          "PasswordLastSet": "02/10/2025 10:27:21",
+          "AccountExpirationDate": "",
+          "IsExpired": "False"
+        },
+        {
+          "SamAccountName": "adurand",
+          "DisplayName": "Alice D.",
+          "UserPrincipalName": "",
+          "Enabled": "True",
+          "LockedOut": "False",
+          "PasswordNeverExpires": "False",
+          "PasswordLastSet": "02/10/2025 10:28:50",
+          "AccountExpirationDate": "",
+          "IsExpired": "False"
+        }
+      ]
+    }
+  ]
+}
